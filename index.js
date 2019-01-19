@@ -1,6 +1,7 @@
 let devices = [[0,0],[100,100],[15,10],[18,18]];
 let stations = [[0, 0, 10],[20, 20, 5],[10, 0, 12]];
 
+// trying to catch expectec errors
 class CustomError extends Error {};
 
 // power based on the given function description
@@ -37,22 +38,20 @@ for (let [x,y] of devices) {
   
  // iterate over each station to calculate power
  for (let [sx,sy,sr] of stations) {
-   let stationPower;
-  
    try {
-     stationPower = powerBetweenDeviceAndStation([x,y], [sx, sy, sr]);
+     let stationPower = powerBetweenDeviceAndStation([x,y], [sx, sy, sr]);
+
+     // store only station with highest power
+     if (stationPower > pmax) {
+       pmax = stationPower;
+       bestStationCoords = [sx, sy];
+     }
     } catch(e){
       if (e instanceof CustomError) {
         console.log(`SOMETHING WENT WRONG: ${e}`);
       } else {
         throw e;
       }
-    }
-    
-    // store only station with highest power
-    if (stationPower > pmax) {
-      pmax = stationPower;
-      bestStationCoords = [sx, sy];
     }
   }
   
