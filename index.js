@@ -68,13 +68,13 @@ for (let [x,y] of devices) {
 try {
   testPowerBetweenDeviceAndStation();
 } catch (e) {
-  console.log(`powerBetweenDeviceAndStation has a problem: ${e.message}`);
+  console.log(`powerBetweenDeviceAndStation has a problem: ${e}`);
 }
 
 try {
   testDistanceBetween();
 } catch (e) {
-  console.log(`distanceBetween has a problem: ${e.message}`);
+  console.log(`distanceBetween has a problem: ${e}`);
 }
 
 function testPowerBetweenDeviceAndStation(){
@@ -87,7 +87,7 @@ function testPowerBetweenDeviceAndStation(){
 
   testVars.forEach(([[px,py], [sx, sy,sr], power]) => {
     if(powerBetweenDeviceAndStation([px,py], [sx,sy, sr]) != power){
-      throw new CustomError(`Error in calculation for ${px}, ${py}, ${sx}, ${sy}, ${sr}, ${power}`)
+      throw new Error(`Error in calculation for ${px}, ${py}, ${sx}, ${sy}, ${sr}, ${power}`)
     }  
   });
 }
@@ -103,7 +103,7 @@ function testDistanceBetween(){
 
   testVars.forEach(([[x1,y1], [x2,y2], distance]) => {
     if(distanceBetween([x1,y1], [x2,y2]) != distance){
-      throw new CustomError(`Error in calculation for ${x1}, ${y1}, ${x2}, ${y2}, ${distance}`);
+      throw new Error(`Error in calculation for ${x1}, ${y1}, ${x2}, ${y2}, ${distance}`);
     }
   })
 }
