@@ -50,23 +50,6 @@ function powerFromDistance(distance, reach){
 
 
 // TESTS
-function testPowerBetweenDeviceAndStation(){
-  if(powerBetweenDeviceAndStation([0,0], [0,0, 10]) != 100){
-    console.log("error");
-  }
-  if(powerBetweenDeviceAndStation([3,4], [0,0,10]) != 25){
-    console.log("error");
-  }
-  if(powerBetweenDeviceAndStation([3,4], [0,0,4]) != 0){
-    console.log("error");
-  }
-  if(powerBetweenDeviceAndStation([-8,6], [0,0, 11]) != 1){
-    console.log("error");
-  }
-  if(powerBetweenDeviceAndStation([-1,1], [0,0, -11]) != 1){
-    console.log("error");
-  }
-}
 
 try {
   testPowerBetweenDeviceAndStation();
@@ -74,22 +57,56 @@ try {
   console.log(`powerBetweenDeviceAndStation has a problem: ${e.message}`);
 }
 
-function testDistanceBetween(){
-  if(distanceBetween([0,0], [0,0]) != 0){
-    console.log("error")
-  }
-  if(distanceBetween([0,0], [10,0]) != 10){
-    console.log("error")
-  }
-  if(distanceBetween([0,0], [0,10]) != 10){
-    console.log("error")
-  }
-  if(distanceBetween([0,0], [0,-10]) != 10){
-    console.log("error")
-  }
-  if(distanceBetween([0,0], [3,4]) != 5){
-    console.log("error")
-  }
+try {
+  testDistanceBetween();
+} catch (e) {
+  console.log(`distanceBetween has a problem: ${e.message}`);
 }
 
-testDistanceBetween();
+function testPowerBetweenDeviceAndStation(){
+  let testVars = [
+    [[0,0], [0,0, 10], 100],
+    [[3,4], [0,0,10], 25],
+    [[3,4], [0,0,4], 0],
+    [[-8,6], [0,0,11], 1]
+  ];
+
+  testVars.forEach(([[px,py], [sx, sy,sr], power]) => {
+    if(powerBetweenDeviceAndStation([px,py], [sx,sy, sr]) != power){
+      throw new Error(`Error in calculation for ${px}, ${py}, ${sx}, ${sy}, ${sr}, ${power}`)
+    }  
+  });
+}
+
+function testDistanceBetween(){
+  let testVars = [
+    [[0,0], [0,0], 0],
+    [[0,0], [10,0], 10],
+    [[0,0], [0,10], 10],
+    [[0,0], [0,-10], 10],
+    [[0,0], [3,4], 5]
+  ];
+
+  testVars.forEach(([[x1,y1], [x2,y2], distance]) => {
+    if(distanceBetween([x1,y1], [x2,y2]) != distance){
+      throw new Error(`Error in calculation for ${x1}, ${y1}, ${x2}, ${y2}, ${distance}`);
+    }
+  })
+
+  // if(distanceBetween([0,0], [0,0]) != 0){
+  //   console.log("error")
+  // }
+  // if(distanceBetween([0,0], [10,0]) != 10){
+  //   console.log("error")
+  // }
+  // if(distanceBetween([0,0], [0,10]) != 10){
+  //   console.log("error")
+  // }
+  // if(distanceBetween([0,0], [0,-10]) != 10){
+  //   console.log("error")
+  // }
+  // if(distanceBetween([0,0], [3,4]) != 5){
+  //   console.log("error")
+  // }
+}
+
