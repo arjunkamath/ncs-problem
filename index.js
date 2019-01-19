@@ -4,16 +4,16 @@ let stations = [[0, 0, 10],[20, 20, 5],[10, 0, 12]];
 class CustomError extends Error {};
 
 // power based on the given function description
-function powerBetweenDeviceAndStation([px,py],[sx,sy,sr]){
-  if(isNaN(px) || isNaN(px) || isNaN(sx) || isNaN(sy) || isNaN(sr)){
-    throw new CustomError(`One/more invalid values: ${px}, ${py}, ${sx}, ${sy}, ${sr}`);
+function powerBetweenDeviceAndStation([dx,dy],[sx,sy,sr]){
+  if(isNaN(dx) || isNaN(dy) || isNaN(sx) || isNaN(sy) || isNaN(sr)){
+    throw new CustomError(`One/more invalid values: ${dx}, ${dy}, ${sx}, ${sy}, ${sr}`);
   }
 
   if (sr < 0) {
     throw new CustomError(`Reach is negative in station: ${sx}, ${sy}, ${sr}`);
   }
 
-  let dist = distanceBetween([px,py],[sx,sy]);
+  let dist = distanceBetween([dx,dy],[sx,sy]);
   if (dist > sr){
     return 0;
   } else {
